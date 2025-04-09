@@ -1,6 +1,6 @@
-# DSA Grindset
+# DSA Vault
 
-A curated collection of Data Structures and Algorithms problems solved by me across various platforms like LeetCode, Codeforces, HackerRank, and more.
+A curated collection of Data Structures and Algorithms problems solved by me across various platforms like LeetCode, Codeforces, and more.
 
 ## 🧠 What’s inside?
 - 🟢 Easy, 🔵 Medium, 🔴 Hard level problems
