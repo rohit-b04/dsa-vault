@@ -10,27 +10,24 @@
  */
 class Solution {
 public:
-    int getLength(ListNode* head) {
-        int count = 0;
-        while(head != nullptr) {
-            count++;
-            head = head -> next;
-        }
-        return count;
-    }
+
+    //Fast and Slow pointer approach
+
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-        int len = getLength(head);
-        if(len == 1) return nullptr;
-        if(len == n) return head -> next;
-        ListNode* temp = head;
-        ListNode* toDel = temp;
-        int it = len - n;
-        while((it--)) {
-            toDel = temp;
-            temp = temp -> next;
-            
+        ListNode* fast = head;
+        ListNode* slow = head;
+
+        for(int i = 0;i < n;i++) 
+            fast = fast -> next;
+
+        if(fast == nullptr) return head -> next;
+
+        while(fast->next != nullptr) {
+            fast = fast -> next;
+            slow = slow -> next;
         }
-        toDel -> next = temp -> next;
+
+        slow -> next = (slow->next) -> next;
         return head;
     }
 };
