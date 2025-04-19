@@ -10,23 +10,36 @@
  */
 class Solution {
 public:
-  // Brute force T.C.O(n) S.C. O(n)
+  // Tc. O(n) Sc. O(1)
     ListNode* reverseKGroup(ListNode* head, int k) {
-        vector<int> v;
-        ListNode* temp = head;
-        while(temp != NULL) {
-            v.push_back(temp -> val);
-            temp = temp -> next;
-        }
-        for(int i = 0;i + k <= v.size();i+=k) reverse(v.begin()+i, v.begin() + i+ k );
+       if(!head || k == 1) return head;
 
-        ListNode* newList = new ListNode(v[0]);
-        temp = newList;
-        for(int i =1;i < v.size();i++) {
-            ListNode* node = new ListNode(v[i]);
-            temp -> next = node;
-            temp = temp -> next;
+       ListNode* dummy = new ListNode(-1);
+       ListNode* temp = head;
+
+       dummy -> next = head;
+       ListNode* prevTail = dummy;
+       int i = 0;
+       while(true) {
+        ListNode* check = temp;
+        for(int i = 0;i < k;++i) 
+        {
+            if(!check) return dummy -> next;
+            check = check -> next;
         }
-        return newList;
+        ListNode* tail = temp;
+        ListNode* prev = nullptr;
+        i = k;
+        while(i--) {
+            ListNode* fwd = temp -> next;
+            temp -> next = prev;
+            prev = temp;
+            temp = fwd;
+        }
+        prevTail -> next = prev;
+        tail -> next = temp;
+        prevTail = tail;
+       } 
+       return dummy -> next;
     }
 };
