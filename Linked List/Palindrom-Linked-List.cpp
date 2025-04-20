@@ -10,23 +10,33 @@
  */
 class Solution {
 public:
+    // TC: O(n) SC: O(1)
     bool isPalindrome(ListNode* head) {
         if(!head -> next) return true;
-        vector<int> arr;
+
         ListNode* fast = head;
         ListNode* slow = head;
 
         while(fast && fast -> next) {
-            arr.push_back(slow->val);
             fast = fast -> next;
             slow = slow->next;
             fast = fast -> next;
         }
-        if(fast) slow = slow -> next; // It means the list is having odd length
-        int i = arr.size()-1;
-        while(slow -> val == arr[i--]) {
+
+        ListNode* curr = slow;
+        ListNode* prev = nullptr;
+        ListNode* fwd;
+        while(curr) {
+            fwd = curr -> next;
+            curr -> next = prev;
+            prev = curr;
+            curr = fwd;
+        }
+        slow = head;
+        while(prev -> val == slow -> val) {
             slow = slow -> next;
-            if(!slow || i < 0) return true;
+            prev = prev -> next;
+            if(!prev) return true;
         }
         return false;
     }
