@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int xorAfterQueries(vector<int>& nums, vector<vector<int>>& queries) {
+        int ans = 0, idx = -1, mod = 1e9 + 7;
+        for(int i = 0;i < queries.size();i++) {
+            idx = queries[i][0];
+            while(idx <= queries[i][1]) {
+                nums[idx] = (1LL * (nums[idx]) * (queries[i][3])) % mod;
+                idx += queries[i][2];
+            }
+        }
+        for(int i: nums) {
+            ans ^= i;
+        }
+        return ans;
+    }
+};
